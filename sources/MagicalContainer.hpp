@@ -55,11 +55,11 @@ public:
 
 
 
-        PrimeIterator begin() {
+        PrimeIterator begin()const {
             return MagicalContainer::PrimeIterator(this->container,0);
         }
-        PrimeIterator end() {
-            return MagicalContainer::PrimeIterator(this->container, this->container.prime_elements.size()-1);
+        PrimeIterator end()const {
+            return MagicalContainer::PrimeIterator(this->container, this->container.prime_elements.size());
         }
 
     };
@@ -91,12 +91,12 @@ public:
 
 
 
-        AscendingIterator begin() {
+        AscendingIterator begin()const {
             return MagicalContainer::AscendingIterator(this->container,0);
         }
 
-        AscendingIterator end() {
-            return MagicalContainer::AscendingIterator(this->container, this->container.size()-1);
+        AscendingIterator end()const {
+            return MagicalContainer::AscendingIterator(this->container, this->container.size());
         }
 
     };
@@ -129,11 +129,11 @@ public:
 
 
 
-        SideCrossIterator begin() {
+        SideCrossIterator begin()const {
             return MagicalContainer::SideCrossIterator(this->container,0);
         }
-        SideCrossIterator end() {
-            return MagicalContainer::SideCrossIterator(this->container, this->container.size()-1);
+        SideCrossIterator end()const {
+            return MagicalContainer::SideCrossIterator(this->container, this->container.size());
         }
     };
 
