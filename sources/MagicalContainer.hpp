@@ -11,15 +11,19 @@ namespace ariel{}
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <set>
 #include <algorithm>
 #include <stdexcept>
 
 class MagicalContainer {
 private:
-    std::vector<int> elements;
+    std::set<int> elements;
+    std::vector<const int*> prime_elements;
+    std::vector<const int*> ascend_elements;
+    std::vector<const int*> slide_elements;
 
 public:
-
+    MagicalContainer()= default;
     void addElement(int element);
 
     void removeElement(int element);
@@ -55,7 +59,7 @@ public:
             return MagicalContainer::PrimeIterator(this->container,0);
         }
         PrimeIterator end() {
-            return MagicalContainer::PrimeIterator(this->container, this->container.size()-1);
+            return MagicalContainer::PrimeIterator(this->container, this->container.prime_elements.size()-1);
         }
 
     };
@@ -134,8 +138,7 @@ public:
     };
 
 
-
-
+    bool is_prime(int element);
 };
 
 #endif

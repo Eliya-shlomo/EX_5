@@ -21,31 +21,56 @@ MagicalContainer::PrimeIterator::PrimeIterator(const MagicalContainer::PrimeIter
 
 
 MagicalContainer::PrimeIterator &MagicalContainer::PrimeIterator::operator++(){
+    if (index>= container.prime_elements.size())
+    {
+        throw std::runtime_error("Iterator out of range");
+    }
+    ++index;
     return *this;
 }
 bool MagicalContainer::PrimeIterator::operator== (const PrimeIterator& other) const{
-    return false;
+    if(&container!=&other.container){
+        throw std::runtime_error("Cannot compare iterators from different containers");
+    }
+    return index==other.index;
 }
 
 bool MagicalContainer::PrimeIterator::operator!=(const PrimeIterator& other) const{
-    return false;
+    if(&container!=&other.container){
+        throw std::runtime_error("Cannot compare iterators from different containers");
+    }
+    return index!=other.index;
 }
 
 bool MagicalContainer::PrimeIterator::operator>(const PrimeIterator& other) const{
-    return false;
+    if(&container!=&other.container){
+        throw std::runtime_error("Cannot compare iterators from different containers");
+    }
+    return index>other.index;
 }
 
 bool MagicalContainer::PrimeIterator::operator<(const PrimeIterator& other) const{
-    return false;
+    if(&container!=&other.container){
+        throw std::runtime_error("Cannot compare iterators from different containers");
+    }
+    return index<other.index;
 }
 
 int MagicalContainer::PrimeIterator::operator*() const {
-    return this->container.elements.at(this->index);
+    if (index >= container.prime_elements.size())
+    {
+        throw std::out_of_range("Iterator out of range");
+    }
+    return *(container.prime_elements.at(index));
 }
 
 
 MagicalContainer::PrimeIterator &
 MagicalContainer::PrimeIterator::operator=(MagicalContainer::PrimeIterator &&other) noexcept {
+    if (this != &other) {
+        container = other.container;
+        index = other.index;
+    }
     return *this;
 }
 

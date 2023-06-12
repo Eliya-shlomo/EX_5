@@ -20,30 +20,55 @@ MagicalContainer::SideCrossIterator::SideCrossIterator(const MagicalContainer::S
 
 MagicalContainer::SideCrossIterator &
 MagicalContainer::SideCrossIterator::operator=(MagicalContainer::SideCrossIterator &&other) noexcept {
+    if (this != &other) {
+        container = other.container;
+        index = other.index;
+    }
     return *this;
 }
 
 bool MagicalContainer::SideCrossIterator::operator==(const MagicalContainer::SideCrossIterator &other) const {
-    return false;
+    if(&container!=&other.container){
+        throw std::runtime_error("");
+    }
+    return index==other.index;
 }
 
 bool MagicalContainer::SideCrossIterator::operator!=(const MagicalContainer::SideCrossIterator &other) const {
-    return false;
+    if(&container!=&other.container){
+        throw std::runtime_error("");
+    }
+    return index!=other.index;
 }
 
 bool MagicalContainer::SideCrossIterator::operator<(const MagicalContainer::SideCrossIterator &other) const {
-    return false;
+    if(&container!=&other.container){
+        throw std::runtime_error("");
+    }
+    return index<other.index;
 }
 
 bool MagicalContainer::SideCrossIterator::operator>(const MagicalContainer::SideCrossIterator &other) const {
-    return false;
+    if(&container!=&other.container){
+        throw std::runtime_error("");
+    }
+    return index>other.index;
 }
 
 int MagicalContainer::SideCrossIterator::operator*() const {
-    return this->container.elements.at(this->index);
+    if (index >= container.slide_elements.size())
+    {
+        throw std::out_of_range("Iterator out of range");
+    }
+    return *(container.slide_elements.at(index));
 }
 
 MagicalContainer::SideCrossIterator &MagicalContainer::SideCrossIterator::operator++() {
+    if (index>= container.slide_elements.size())
+    {
+        throw std::runtime_error("Iterator out of range");
+    }
+    ++index;
     return *this;
 }
 

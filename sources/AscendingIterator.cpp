@@ -20,31 +20,56 @@ MagicalContainer::AscendingIterator::AscendingIterator(const MagicalContainer::A
 
 
 MagicalContainer::AscendingIterator &MagicalContainer::AscendingIterator::operator++(){
+    if (index>= container.ascend_elements.size())
+    {
+        throw std::runtime_error("Iterator out of range");
+    }
+    ++index;
     return *this;
 }
 bool MagicalContainer::AscendingIterator::operator== (const AscendingIterator& other) const{
-    return false;
+    if(&container!=&other.container){
+        throw std::runtime_error("");
+    }
+    return index==other.index;
 }
 
 bool MagicalContainer::AscendingIterator::operator!=(const AscendingIterator& other) const{
-    return false;
+    if(&container!=&other.container){
+        throw std::runtime_error("");
+    }
+    return index!=other.index;
 }
 
 bool MagicalContainer::AscendingIterator::operator>(const AscendingIterator& other) const{
-    return false;
+    if(&container!=&other.container){
+        throw std::runtime_error("");
+    }
+    return index>other.index;
 }
 
 bool MagicalContainer::AscendingIterator::operator<(const AscendingIterator& other) const{
-    return false;
+    if(&container!=&other.container){
+        throw std::runtime_error("");
+    }
+    return index<other.index;
 }
 
 int MagicalContainer::AscendingIterator::operator*() const {
-    return this->container.elements.at(this->index);
+    if (index >= container.ascend_elements.size())
+    {
+        throw std::out_of_range("Iterator out of range");
+    }
+    return *(container.ascend_elements.at(index));
 }
 
 
 MagicalContainer::AscendingIterator &
 MagicalContainer::AscendingIterator::operator=(MagicalContainer::AscendingIterator &&other) noexcept {
+    if (this != &other) {
+        container = other.container;
+        index = other.index;
+    }
     return *this;
 }
 
@@ -60,6 +85,7 @@ MagicalContainer::AscendingIterator::operator=(const MagicalContainer::Ascending
         index = other.index;
     }
 
-    return *this;}
+    return *this;
+}
 
 
